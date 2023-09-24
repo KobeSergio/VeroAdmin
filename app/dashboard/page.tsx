@@ -52,6 +52,9 @@ export default function Dashboard() {
               <h3 className="col-span-3 font-monts font-semibold text-sm text-start text-[#5C5C5C] px-4 pl-0">
                 Timestamp
               </h3>
+              <h3 className="col-span-1 font-monts font-semibold text-sm text-start text-[#5C5C5C] px-4">
+                Subject
+              </h3>
               <h3 className="col-span-3 font-monts font-semibold text-sm text-start text-[#5C5C5C] px-4">
                 Message
               </h3>
@@ -78,7 +81,10 @@ export default function Dashboard() {
                       <h3 className=" col-span-3 font-monts font-semibold text-sm text-darkerGray px-4 pl-0">
                         {row.timestamp}
                       </h3>
-                      <h3 className=" col-span-7 font-monts font-semibold text-sm text-darkerGray px-4">
+                      <h3 className=" col-span-1 font-monts font-semibold text-sm text-darkerGray px-4">
+                        {row.subject}
+                      </h3>
+                      <h3 className=" col-span-6 font-monts font-semibold text-sm text-darkerGray px-4">
                         {row.message}
                       </h3>
                       <h3 className=" col-span-1 font-monts font-semibold text-sm text-start text-darkerGray px-4">
@@ -86,7 +92,7 @@ export default function Dashboard() {
                           href={"post/" + row.post_id}
                           className="font-monts font-semibold text-sm text-primaryBlue p-3 pl-0 hover:underline"
                         >
-                          Edit
+                          View
                         </Link>
                       </h3>
                       <h3 className=" col-span-1 font-monts font-semibold text-sm text-start text-darkerGray px-4">

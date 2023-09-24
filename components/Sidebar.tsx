@@ -23,7 +23,7 @@ export default function Sidebar() {
           }`}
         >
           <BsGrid size={18} />
-          <span className="ml-3">User Dashboard</span>
+          <span className="ml-3">Discussions Manager</span>
         </Link>
       </div>
     </div>
