@@ -13,6 +13,7 @@ import {
   where,
 } from "firebase/firestore";
 import { Post } from "@/types/Post";
+import bcrypt from 'bcryptjs';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -27,8 +28,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 //Firebase constants
-export const auth = getAuth(app);
-export const storage = getStorage(app);
 export const db = getFirestore(app);
 
 export default class Firebase {
@@ -43,7 +42,8 @@ export default class Firebase {
         return { status: 400 };
       }
       for (const doc of querySnapshot.docs) {
-        if (doc.data().password === password) {
+        const match = await bcrypt.compare(password, doc.data().password);
+        if (match) {
           return { status: 200, data: doc.data() };
         }
       }

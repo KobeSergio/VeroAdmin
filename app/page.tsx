@@ -50,8 +50,8 @@ export default function SignIn() {
 
   return (
     <div className="flex flex-col w-full items-center justify-center min-h-screen  z-50 bg-white px-6 py-12 lg:py-24">
-      <div className="w-[120px] h-[120px] bg-gray-400" />
-      <h2 className="font-monts text-xl text-primaryBlue font-bold text-center mt-6">
+       
+      <h2 className="font-monts text-4xl text-primaryBlue font-bold text-center mt-6">
         VeroAdmin
       </h2>
       <form className="max-w-lg mx-auto p-4 mt-6">
