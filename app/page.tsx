@@ -120,7 +120,7 @@ export default function SignIn() {
         </div> */}
         <section className="flex gap-x-1.5">
           <button
-            type="button"
+            type="submit"
             onClick={handleSubmit}
             className="w-full bg-primaryBlue hover:bg-[#365592] font-monts font-semibold text-center text-sm  text-white py-3 px-5 rounded-lg mt-6 flex items-center justify-center"
           >
