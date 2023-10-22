@@ -53,8 +53,6 @@ export default function SignIn() {
     if (email === "")
       return;
 
-    setIsLoading(true);
-
     try {
       const res = await firebase.forgotPassword(email);
 
@@ -65,8 +63,6 @@ export default function SignIn() {
         alert("Please check your email to reset your password");      
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
