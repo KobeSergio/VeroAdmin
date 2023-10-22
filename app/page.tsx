@@ -48,13 +48,35 @@ export default function SignIn() {
     }
   };
 
+  const handleForgotPassword = async (event: any) => {
+    event.preventDefault();
+    if (email === "")
+      return;
+
+    setIsLoading(true);
+
+    try {
+      const res = await firebase.forgotPassword(email);
+
+      if (res === undefined)
+        return;
+            
+      if (res.status === 200)
+        alert("Please check your email to reset your password");      
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <div className="flex flex-col w-full items-center justify-center min-h-screen  z-50 bg-white px-6 py-12 lg:py-24">
        
       <h2 className="font-monts text-4xl text-primaryBlue font-bold text-center mt-6">
         VeroAdmin
       </h2>
-      <form className="max-w-lg mx-auto p-4 mt-6">
+      <form className="max-w-sm w-full mx-auto p-4 mt-6">
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg">
           <span>
             <Image
@@ -96,21 +118,28 @@ export default function SignIn() {
             Forgot password?
           </h4>
         </div> */}
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className="w-full bg-primaryBlue hover:bg-[#365592] font-monts font-semibold text-center text-sm  text-white py-3 px-5 rounded-lg mt-6 flex items-center justify-center"
-        >
-          {isLoading ? (
-            <div className="flex flex-row items-center gap-1">
-              {" "}
-              <Spinner />
-              Logging in...
-            </div>
-          ) : (
-            "Login"
-          )}
-        </button>
+        <section className="flex gap-x-1.5">
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="w-full bg-primaryBlue hover:bg-[#365592] font-monts font-semibold text-center text-sm  text-white py-3 px-5 rounded-lg mt-6 flex items-center justify-center"
+          >
+            {isLoading ? (
+              <div className="flex flex-row items-center gap-1">
+                {" "}
+                <Spinner />
+                Logging in...
+              </div>
+            ) : (
+              "Login"
+            )}
+          </button>
+          <button
+            onClick={handleForgotPassword}
+            className="block w-full mt-6 underline text-blue-500">
+            Forgot Password?
+          </button>
+        </section>
       </form>
     </div>
   );
