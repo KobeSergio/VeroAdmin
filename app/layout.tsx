@@ -13,7 +13,7 @@ export default function RootLayout({
   const pathname = usePathname();
   return (
     <html lang="en">
-      <title>VeroAdmin</title>
+      <title>Admin</title>
       <body>
         <SessionProvider>
           {pathname !== "/" && <Nav />}

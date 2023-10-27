@@ -17,7 +17,7 @@ export default function Nav() {
             <div className="flex items-center justify-between py-3 lg:block">
               <div className="flex flex-row gap-3 items-center">
                 <h1 className="font-monts font-semibold text-base lg:text-xl text-primaryBlue">
-                  VeroAdmin
+                  Admin
                 </h1>
               </div>
               <div className="lg:hidden">

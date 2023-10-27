@@ -24,9 +24,13 @@ export default function SignIn() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    if (email !== "" && password !== "") {
-      setIsLoading(true);
-
+    if (email === "" && password === "") {
+      alert("Please fill up all fields.");
+      return;
+    }
+  
+    setIsLoading(true);
+  
       try {
         const res = await signIn("credentials", {
           email: email,
@@ -45,14 +49,14 @@ export default function SignIn() {
       }
 
       setIsLoading(false);
-    }
+    
   };
 
   return (
     <div className="flex flex-col w-full items-center justify-center min-h-screen  z-50 bg-white px-6 py-12 lg:py-24">
        
       <h2 className="font-monts text-4xl text-primaryBlue font-bold text-center mt-6">
-        VeroAdmin
+        Admin
       </h2>
       <form className="max-w-lg mx-auto p-4 mt-6">
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg">
