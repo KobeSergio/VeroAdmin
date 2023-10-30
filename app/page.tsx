@@ -60,7 +60,9 @@ export default function SignIn() {
       </h2>
       <form className="max-w-lg mx-auto p-4 mt-6">
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg">
-        <label htmlFor="email" className="sr-only">Email address</label>
+        <label htmlFor="email" className="label-text">
+    Email address
+  </label>
         
           <span>
             <Image
@@ -71,16 +73,19 @@ export default function SignIn() {
             /> 
           </span>
           <input
+            id="email"
             className="appearance-none bg-transparent border-none w-full font-monts font-medium text-sm text-darkerGray ml-2 py-1 px-2 leading-tight focus:outline-none"
             type="text"
             placeholder="Email address"
             aria-label="Email address"
             value={email}
             onChange={handleInputChange}
-          />
+          /> 
         </div>
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg mt-4">
-        <label htmlFor="password" className="sr-only">Password</label>
+        <label htmlFor="password" className="label-text">
+    Password
+  </label>
 
           <span>
             <Image
@@ -91,6 +96,7 @@ export default function SignIn() {
             />{" "}
           </span>
           <input
+            id="password"
             className="appearance-none bg-transparent border-none w-full font-monts font-medium text-sm text-darkerGray ml-2 py-1 px-2 leading-tight focus:outline-none"
             type="password"
             placeholder="Password"
