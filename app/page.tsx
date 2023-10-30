@@ -61,7 +61,7 @@ export default function SignIn() {
       <form className="max-w-lg mx-auto p-4 mt-6">
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg">
         <label htmlFor="email" className="label-text">
-    Email address
+    
   </label>
         
           <span>
@@ -84,7 +84,7 @@ export default function SignIn() {
         </div>
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg mt-4">
         <label htmlFor="password" className="label-text">
-    Password
+    
   </label>
 
           <span>
