@@ -60,6 +60,8 @@ export default function SignIn() {
       </h2>
       <form className="max-w-lg mx-auto p-4 mt-6">
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg">
+        <label htmlFor="email" className="sr-only">Email address</label>
+        
           <span>
             <Image
               src={"assets/icons/envelope.svg"}
@@ -78,6 +80,8 @@ export default function SignIn() {
           />
         </div>
         <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg mt-4">
+        <label htmlFor="password" className="sr-only">Password</label>
+
           <span>
             <Image
               src={"assets/icons/key.svg"}
