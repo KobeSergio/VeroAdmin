@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getAuth } from "firebase/auth";
+import { 
+  getAuth, 
+  sendPasswordResetEmail 
+} from "firebase/auth";
 import {
   getFirestore,
   doc,
@@ -50,6 +53,19 @@ export default class Firebase {
       return { status: 401 };
     } catch (error) {
       console.log(error);
+      return { status: 500 };
+    }
+  }
+
+  // POST: Send a reset password email
+  // Returns 200 status code if 
+  // successful, otherwise 404.
+  async forgotPassword(email: string) {
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      return { status: 200 };
+    } catch (error) {
       return { status: 500 };
     }
   }
