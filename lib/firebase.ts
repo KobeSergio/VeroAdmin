@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getAuth } from "firebase/auth";
+import { 
+  getAuth, 
+  sendPasswordResetEmail 
+} from "firebase/auth";
 import {
   getFirestore,
   doc,
@@ -14,6 +17,7 @@ import {
 } from "firebase/firestore";
 import { Post } from "@/types/Post";
 import bcrypt from 'bcryptjs';
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -35,21 +39,27 @@ export default class Firebase {
   //Returns 200 if successful, 400 if email is not found, 401 if password is incorrect, and 500 if there is an error.
   async signIn(email: string, password: string) {
     try {
-      const q = query(collection(db, "users"), where("email", "==", email));
-      const querySnapshot = await getDocs(q);
-      if (querySnapshot.empty) {
-        console.log("No matching documents.");
-        return { status: 400 };
-      }
-      for (const doc of querySnapshot.docs) {
-        const match = await bcrypt.compare(password, doc.data().password);
-        if (match) {
-          return { status: 200, data: doc.data() };
-        }
-      }
+      const auth = getAuth();
+      const res = await signInWithEmailAndPassword(auth, email, password);
+
+      if (res.user) 
+        return { status: 200, data: res.user.providerData }
+
       return { status: 401 };
     } catch (error) {
-      console.log(error);
+      return { status: 500 };
+    }
+  }
+
+// POST: Send a reset password email
+  // Returns 200 status code if 
+  // successful, otherwise 404.
+  async forgotPassword(email: string) {
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      return { status: 200 };
+    } catch (error) {
       return { status: 500 };
     }
   }
