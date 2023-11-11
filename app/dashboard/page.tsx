@@ -84,7 +84,7 @@ export default function Dashboard() {
                       <h3 className=" col-span-1 font-monts font-semibold text-sm text-darkerGray px-4">
                         {row.subject}
                       </h3>
-                      <h3 className=" col-span-6 font-monts font-semibold text-sm text-darkerGray px-4">
+                      <h3 className="col-span-6 font-monts font-semibold text-sm text-darkerGray px-4 overflow-y-auto max-h-[5rem]">
                         {row.message}
                       </h3>
                       <h3 className=" col-span-1 font-monts font-semibold text-sm text-start text-darkerGray px-4">
