@@ -69,13 +69,12 @@ export default function SignIn() {
     }
   }
   return (
-    <div className="flex flex-col w-full items-center justify-center min-h-screen  z-50 bg-white px-6 py-12 lg:py-24">
-       
-      <h2 className="font-monts text-4xl text-primaryBlue font-bold text-center mt-6">
+    <div className="flex flex-col w-full items-center justify-center min-h-screen bg-gradient-to-b from-[#4A148C] via-[#311B92] to-[#1A237E] z-50 px-6 py-12 lg:py-24">
+    <h2 className="font-monts text-4xl text-white font-bold text-center mt-6">
         Admin
       </h2>
-      <form className="max-w-sm w-full mx-auto p-4 mt-6">
-        <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg">
+      <form className="max-w-md w-full mx-auto p-4 mt-6 bg-[#FFFFF] rounded-md shadow-lg">
+        <div className="flex items-center border-2 border-[#FFFFF] px-4 py-2 rounded-lg">
         <label className="sr-only" htmlFor="email">
     Email address
   </label>
@@ -89,7 +88,7 @@ export default function SignIn() {
           </span>
           <input
             id="email"
-            className="appearance-none bg-transparent border-none w-full font-monts font-medium text-sm text-darkerGray ml-2 py-1 px-2 leading-tight focus:outline-none"
+            className="appearance-none bg-transparent border-none w-full font-monts font-medium text-sm text-white ml-2 py-1 px-2 leading-tight focus:outline-none"
             type="text"
             placeholder="Email address"
             aria-label="Email address"
@@ -97,7 +96,7 @@ export default function SignIn() {
             onChange={handleInputChange}
           /> 
         </div>
-        <div className="flex items-center border-2 border-[#CED4DA] px-4 py-2 rounded-lg mt-4">
+        <div className="flex items-center border-2 border-[#FFFFF] px-4 py-2 rounded-lg mt-4">
         <label className="sr-only" htmlFor="password">
     Password
   </label>
@@ -111,7 +110,7 @@ export default function SignIn() {
           </span>
           <input
             id="password"
-            className="appearance-none bg-transparent border-none w-full font-monts font-medium text-sm text-darkerGray ml-2 py-1 px-2 leading-tight focus:outline-none"
+            className="appearance-none bg-transparent border-none w-full font-monts font-medium text-sm text-white ml-2 py-1 px-2 leading-tight focus:outline-none"
             type="password"
             placeholder="Password"
             aria-label="Password"
@@ -128,7 +127,7 @@ export default function SignIn() {
           <button
             type="submit"
             onClick={handleSubmit}
-            className="w-full bg-primaryBlue hover:bg-[#365592] font-monts font-semibold text-center text-sm  text-white py-3 px-5 rounded-lg mt-6 flex items-center justify-center"
+            className="w-full bg-[#7851A9] hover:bg-[#365592] font-monts font-semibold text-center text-sm  text-white py-3 px-5 rounded-lg mt-6 flex items-center justify-center"
           >
             {isLoading ? (
               <div className="flex flex-row items-center gap-1">

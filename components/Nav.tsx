@@ -16,7 +16,7 @@ export default function Nav() {
           <div>
             <div className="flex items-center justify-between py-3 lg:block">
               <div className="flex flex-row gap-3 items-center">
-                <h1 className="font-monts font-semibold text-base lg:text-xl text-primaryBlue">
+              <h1 className="font-monts font-semibold text-base lg:text-xl text-white">
                   Admin
                 </h1>
               </div>
@@ -42,7 +42,7 @@ export default function Nav() {
             >
               <Link
                 href="/"
-                className="flex items-center px-4 py-2  font-monts font-semibold text-sm rounded-[10px] cursor-pointer text-darkGray"
+                className="flex items-center px-4 py-2  font-monts font-semibold text-sm rounded-[10px] cursor-pointer text-white"
               >
                 <BsBoxArrowInLeft />
                 <span className="ml-3">Logout</span>

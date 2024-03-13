@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <title>Admin</title>
-      <body>
+      <body className="bg-gradient-to-b from-purple-400 via-pink-200 to-blue-200">
         <SessionProvider>
           {pathname !== "/" && <Nav />}
           <main className="">{children}</main>

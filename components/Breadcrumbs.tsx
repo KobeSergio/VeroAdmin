@@ -12,7 +12,7 @@ export default function Breadcrumbs({ items }: any) {
               <Link
               href={item.route}
                 
-                className="font-monts font-medium text-xs text-darkGray cursor-pointer hover:underline transition duration-150 ease-in-out"
+              className="font-monts font-medium text-xs text-white cursor-pointer hover:underline transition duration-150 ease-in-out"
               >
                 {item.name}
               </Link>
@@ -22,7 +22,7 @@ export default function Breadcrumbs({ items }: any) {
               </div>
             </>
           ) : (
-            <span className="font-monts font-semibold text-xs text-primaryBlue transition duration-150 ease-in-out">
+            <span className="font-monts font-semibold text-xs text-white transition duration-150 ease-in-out">
               {item.name}
             </span>
           )}

@@ -19,7 +19,7 @@ export default async function DashboardLayout({
     redirect("/");
   }
   return (
-    <section className="min-h-[80vh] w-full bg-[#F9FAFE] px-6 lg:px-12 py-6">
+    <section className="min-h-[94vh] w-full bg-gradient-to-b from-purple-400 via-pink-200 to-blue-200 px-6 lg:px-12 py-6">
       {children}
     </section>
   );

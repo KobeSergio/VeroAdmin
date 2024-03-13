@@ -176,16 +176,16 @@ export default function EventManager() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider p-6 bg-[#CCCCFF]">
                       Name
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider  p-6 bg-[#CCCCFF]">
                       Date
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider p-6 bg-[#CCCCFF]">
                       Description
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider p-6 bg-[#CCCCFF]">
                       Actions
                     </th>
                   </tr>
@@ -201,8 +201,8 @@ export default function EventManager() {
                             {new Date(event.date.seconds * 1000).toLocaleString()}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500">{event.description}</div>
+                      <td className="px-6 py-4 whitespace-normal">
+                        <div className="text-sm text-gray-500 overflow-y-auto max-h-20">{event.description}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button
@@ -269,7 +269,7 @@ export default function EventManager() {
                 <textarea
                   id="description"
                   rows={4}
-                  className="border border-[#BDBDBD] rounded-[10px] py-2 px-3 w-full"
+                  className="border border-[#BDBDBD] rounded-[10px] py-2 px-3 w-full h-[120px] overflow-y-auto"
                   value={newEvent.description}
                   onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
                 />
@@ -286,58 +286,89 @@ export default function EventManager() {
       </div>
       
       {isEditModalOpen && editedEvent && (
-        <Modal onClose={closeModal}>
-          <h1>Edit Event</h1>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={editedEvent.name}
-              onChange={(e) => setEditedEvent({ ...editedEvent, name: e.target.value })}
-            />
-            <input
-              type="date"
-              value={editedEvent.date instanceof Date ? editedEvent.date.toISOString().split('T')[0] : editedEvent.date?.seconds ? new Date(editedEvent.date.seconds * 1000).toISOString().split('T')[0] : ""}
-              onChange={(e) => setEditedEvent({ ...editedEvent, date: { seconds: new Date(e.target.value).getTime() / 1000 } })}
-            />
-            <textarea
-              value={editedEvent.description}
-              onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
-            />
-            <button type="submit">Submit</button>
-          </form>
-        </Modal>
-      )}
+  <Modal onClose={closeModal}>
+    <div className="p-6 bg-white rounded-lg shadow-xl">
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">Edit Event</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label htmlFor="eventName" className="block text-sm font-semibold text-gray-700 mb-1">Event Name</label>
+          <input
+            type="text"
+            id="eventName"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-primaryBlue"
+            value={editedEvent.name}
+            onChange={(e) => setEditedEvent({ ...editedEvent, name: e.target.value })}
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="eventDate" className="block text-sm font-semibold text-gray-700 mb-1">Event Date</label>
+          <input
+            type="date"
+            id="eventDate"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:border-primaryBlue"
+            value={editedEvent.date instanceof Date ? editedEvent.date.toISOString().split('T')[0] : editedEvent.date?.seconds ? new Date(editedEvent.date.seconds * 1000).toISOString().split('T')[0] : ""}
+            onChange={(e) => setEditedEvent({ ...editedEvent, date: { seconds: new Date(e.target.value).getTime() / 1000 } })}
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="eventDescription" className="block text-sm font-semibold text-gray-700 mb-1">Event Description</label>
+          <textarea
+            id="eventDescription"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full h-32 resize-none focus:outline-none focus:border-primaryBlue"
+            value={editedEvent.description}
+            onChange={(e) => setEditedEvent({ ...editedEvent, description: e.target.value })}
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-primaryBlue text-white rounded-md px-4 py-2 font-semibold hover:bg-primaryBlue-dark focus:outline-none focus:bg-primaryBlue-dark"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </Modal>
+)}
 
-      {isRegistrationModalOpen && (
-        <Modal onClose={toggleRegistrationModal}>
-          <strong><h1>Registered Users</h1></strong>
-          <br></br>
-          {registeredUsers.length === 0 ? (
-            <p>No users have registered for this event.</p>
-          ) : (
-            <>
-              <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-                <thead>
-                  <tr>
-                    <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left', borderTopLeftRadius: '8px', borderTopRightRadius: '8px' }}>Name</th>
-                    <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left', borderTopLeftRadius: '8px', borderTopRightRadius: '8px' }}>Email</th>
+
+    {isRegistrationModalOpen && (
+  <Modal onClose={toggleRegistrationModal}>
+    <div className="p-6 bg-white rounded-lg shadow-xl">
+      <h1 className="text-2xl font-bold text-gray-800">Registered Users</h1>
+      <div className="mt-4">
+        {registeredUsers.length === 0 ? (
+          <p className="text-gray-600">No users have registered for this event.</p>
+        ) : (
+          <>
+            <table className="w-full border-collapse border border-gray-300">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="py-2 px-4 border border-gray-300 text-left">Name</th>
+                  <th className="py-2 px-4 border border-gray-300 text-left">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {registeredUsers.map((user, index) => (
+                  <tr key={index} className="bg-white">
+                    <td className="py-2 px-4 border border-gray-300">{user.name}</td>
+                    <td className="py-2 px-4 border border-gray-300">{user.email}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {registeredUsers.map((user, index) => (
-                    <tr key={index} style={{ border: '1px solid #ddd' }}>
-                      <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left', borderBottomLeftRadius: '8px' }}>{user.name}</td>
-                      <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left', borderBottomRightRadius: '8px' }}>{user.email}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <br></br>
-              <button onClick={exportToExcel} style={{ backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}>Export to Excel</button>
-            </>
-          )}
-        </Modal>
-      )}
+                ))}
+              </tbody>
+            </table>
+            <button
+              onClick={exportToExcel}
+              className="mt-4 bg-primaryBlue text-white rounded-md px-4 py-2 font-semibold hover:bg-primaryBlue-dark focus:outline-none focus:bg-primaryBlue-dark"
+            >
+              Export to Excel
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  </Modal>
+)}
+
     </>
   );
 }

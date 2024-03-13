@@ -68,14 +68,16 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="min-h-[75vh] flex flex-col lg:flex-row gap-5">
+        <div className="bg-gradient-to-b from-purple-400 via-pink-200 to-blue-200">
+      <div className="min-h-[75vh] flex flex-col lg:flex-row gap-5 ">
         <aside className="w-full lg:w-1/4">
           <Sidebar />
         </aside>
         <div className="w-full flex flex-col gap-5">
           <Breadcrumbs items={breadcrumbItems} />
-          <div className="overflow-x-auto w-full h-full bg-white border border-[#D5D7D8] rounded-[10px]">
-            <div className="min-w-[1068.8px] grid grid-cols-12 border-b border-[#BDBDBD] p-6">
+          <div className="w-full flex flex-col gap-5">
+        <div className="overflow-x-auto w-full h-full bg-white border border-[#D5D7D8] rounded-[10px] p-4">
+          <div className="min-w-[1068.8px] grid grid-cols-12 border-b border-[#BDBDBD] rounded-[10px] p-6 bg-[#CCCCFF]">
               <h3 className="col-span-3 font-monts font-semibold text-sm text-start text-[#5C5C5C] px-4 pl-0">
                 Timestamp
               </h3>
@@ -128,6 +130,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      </div></div>
     </>
   );
 }

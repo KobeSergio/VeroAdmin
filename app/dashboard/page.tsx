@@ -42,13 +42,13 @@ export default function Dashboard() {
   }, []);
   return (
     <>
-      <div className="min-h-[75vh] flex flex-col lg:flex-row gap-5">
+       <div className="min-h-[75vh] flex flex-col lg:flex-row gap-5 ">
         <aside className="w-full lg:w-1/4">
           <Sidebar />
         </aside>
         <div className="w-full flex flex-col gap-5">
-          <div className="overflow-x-auto w-full h-full bg-white border border-[#D5D7D8] rounded-[10px]">
-            <div className="min-w-[1068.8px] grid grid-cols-12 border-b border-[#BDBDBD] p-6">
+        <div className="overflow-x-auto w-full h-full bg-white border border-[#D5D7D8] rounded-[10px] p-4">
+          <div className="min-w-[1068.8px] grid grid-cols-12 border-b border-[#BDBDBD] rounded-[10px] p-6 bg-[#CCCCFF]">
               <h3 className="col-span-3 font-monts font-semibold text-sm text-start text-[#5C5C5C] px-4 pl-0">
                 Timestamp
               </h3>
@@ -60,8 +60,8 @@ export default function Dashboard() {
               </h3>
             </div>
 
-            <div className="lg:overflow-y-auto w-full max-h-[100vh] ">
-              {posts.length == 0 ? (
+            <div className="lg:overflow-y-auto w-full max-h-[35rem] ">
+            {posts.length === 0 ? (
                 <div className="flex justify-center items-center p-6">
                   <h3 className="font-monts font-medium text-base text-center text-darkerGray">
                     There are no items to display.
@@ -73,9 +73,7 @@ export default function Dashboard() {
                     <div
                       key={index}
                       className={`min-w-[1068.8px] grid grid-cols-12 p-6 ${
-                        index < posts.length - 1
-                          ? "border-b border-[#BDBDBD] "
-                          : "border-none"
+                        index < posts.length - 1 ? "border-b border-[#BDBDBD] " : "border-none"
                       }  `}
                     >
                       <h3 className=" col-span-3 font-monts font-semibold text-sm text-darkerGray px-4 pl-0">
@@ -90,8 +88,8 @@ export default function Dashboard() {
                       <h3 className=" col-span-1 font-monts font-semibold text-sm text-start text-darkerGray px-4">
                         <Link
                           href={"post/" + row.post_id}
-                          className="font-monts font-semibold text-sm text-primaryBlue p-3 pl-0 hover:underline"
-                        >
+                          className="font-monts font-semibold text-sm text-blue-500 p-3 pl-0 hover:underline"
+                          >
                           View
                         </Link>
                       </h3>
