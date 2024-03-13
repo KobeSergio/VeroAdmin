@@ -26,6 +26,20 @@ export default function Sidebar() {
           <span className="ml-3">Discussions Manager</span>
         </Link>
       </div>
+      <br></br>
+      <div className="w-full space-y-2 flex flex-col justify-between">
+        <Link
+          href={"/event"}
+          className={`flex items-center pl-4 pr-2 py-3 font-monts font-semibold text-sm rounded-[10px] cursor-pointer ${
+            pathname.includes("/event")
+              ? "bg-primaryBlue text-white fill-white"
+              : "text-darkGray hover:bg-lightestGray "
+          }`}
+        >
+          <BsGrid size={18} />
+          <span className="ml-3">Event Manager</span>
+        </Link>
+      </div>
     </div>
   );
 }

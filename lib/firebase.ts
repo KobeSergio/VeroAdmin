@@ -12,12 +12,21 @@ import {
   getDocs,
   deleteDoc,
   updateDoc,
+  addDoc,
   query,
   where,
+  DocumentSnapshot,
+  QuerySnapshot,
 } from "firebase/firestore";
 import { Post } from "@/types/Post";
-import bcrypt from 'bcryptjs';
+import { Event } from "@/types/Event";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
+interface Registration {
+  eventId: string;
+  name: string;
+  email: string;
+}
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -33,8 +42,11 @@ const app = initializeApp(firebaseConfig);
 
 //Firebase constants
 export const db = getFirestore(app);
+export const storage = getStorage(app);
+const DATE_NOW = new Date().toLocaleString();
 
 export default class Firebase {
+  
   //GET: Sign in funciton.
   //Returns 200 if successful, 400 if email is not found, 401 if password is incorrect, and 500 if there is an error.
   async signIn(email: string, password: string) {
@@ -123,6 +135,94 @@ export default class Firebase {
     } catch (error) {
       console.log(error);
       return { status: 500 };
+    }
+  }
+
+  async getEvents() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "events"));
+      const events: Event[] = [];
+      querySnapshot.forEach((doc) => {
+        // Set id to the doc id
+        const data = doc.data() as Event;
+        data.id = doc.id;
+        events.push(data);
+      });
+      return events;
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  }
+
+  // POST: Create new event
+  // Returns 200 if successful, 500 if there is an error.
+  async createEvent(event: Event) {
+    try {
+      const docRef = await addDoc(collection(db, "events"), {
+        ...event,
+      });
+      return { status: 200 };
+    } catch (error) {
+      console.log(error);
+      return { status: 400 };
+    }
+  }
+
+  //DELETE: Delete event
+  //Returns 200 if successful, 500 if there is an error.
+  async deleteEvent(id: string) {
+    try {
+      await deleteDoc(doc(db, "events", id));
+      return { status: 200 };
+    } catch (error) {
+      console.log(error);
+      return { status: 500 };
+    }
+  }
+  
+  //EDIT
+  async updateEvent(eventId: string, eventData: Partial<Event>) {
+    try {
+      const eventRef = doc(db, "events", eventId);
+      await updateDoc(eventRef, eventData);
+      return { status: 200 };
+    } catch (error) {
+      console.log(error);
+      return { status: 500 };
+    }
+  }
+
+  async getRegistrations(eventId: string): Promise<Registration[]> {
+    try {
+      const registrationsRef = collection(db, "registrations");
+      const q = query(registrationsRef, where("eventId", "==", eventId));
+      const querySnapshot = await getDocs(q);
+      const registrations: Registration[] = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        registrations.push({ eventId: data.eventId, name: data.name, email: data.email });
+      });
+      return registrations;
+    } catch (error) {
+      console.error("Error getting registrations:", error);
+      throw error;
+    }
+  }
+
+  async getRegisteredUsers(eventId: string): Promise<Registration[]> {
+    try {
+      const registrationsRef = collection(db, 'registration');
+      const q = query(registrationsRef, where('eventId', '==', eventId));
+      const querySnapshot = await getDocs(q);
+      const registrations: Registration[] = [];
+      querySnapshot.forEach((doc) => {
+        registrations.push(doc.data() as Registration);
+      });
+      return registrations;
+    } catch (error) {
+      console.error('Error fetching registrations for event:', error);
+      throw error;
     }
   }
 }
